@@ -6,6 +6,7 @@ export default defineNuxtConfig({
       "@pinia/nuxt",
       {
         autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+        storesDirs: ["~/stores"],
       },
     ],
     "nuxt-zod-i18n",
@@ -22,12 +23,6 @@ export default defineNuxtConfig({
     "nuxt-ark-ui",
     "@nuxt/test-utils",
   ],
-  pinia: {
-    storesDirs: ["~/stores"],
-  },
-  imports: {
-    dirs: ["~/stores"],
-  },
   i18n: {
     langDir: "locales",
     locales: [
@@ -64,5 +59,10 @@ export default defineNuxtConfig({
     outputDir: "assets",
     fontsDir: "fonts",
     stylePath: "css/fonts.css",
+  },
+  runtimeConfig: {
+    app: {
+      apiURL: process.env.NUXT_API_URL,
+    },
   },
 });

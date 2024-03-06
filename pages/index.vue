@@ -1,5 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const $auth = useAuth();
+const user = useCurrentUser();
+</script>
 
 <template>
-  <div>hello World</div>
+  <div class="" dir="auto">
+    <client-only>
+      <pre>{{ user }}</pre>
+    </client-only>
+    <button @click="$auth.logout">Logout</button>
+  </div>
 </template>

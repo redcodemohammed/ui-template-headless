@@ -1,8 +1,9 @@
 export default defineNuxtPlugin((nuxtApp) => {
-  // const { session } = useUserSession();
-  const jwt = useCookie("jwt");
+  const jwt = useAccessToken();
+  const { apiURL } = useRuntimeConfig().app;
 
   const api = $fetch.create({
+    baseURL: apiURL,
     onRequest({ request, options }) {
       if (jwt.value) {
         // Add Authorization header

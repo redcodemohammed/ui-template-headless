@@ -1,0 +1,15 @@
+{
+  "i18n-ally.localesPaths": [
+    "locales"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "gutterpreview.sourceFolder": "public",
+  "vue.complete.casing.props": "kebab",
+  "vue.complete.casing.tags": "kebab",
+  "cSpell.words": [
+    "vueuse"
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+}
