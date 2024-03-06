@@ -10,8 +10,8 @@ export const useAuth = () => {
     return !!authStore.accessToken;
   });
 
-  async function login(uid: string, password: string) {
-    const route = useRoute("login");
+  async function signin(uid: string, password: string) {
+    const route = useRoute("signin");
 
     const response = await $api<SignInResponse>(`${API}/signin`, {
       method: "POST",
@@ -20,7 +20,29 @@ export const useAuth = () => {
 
     if (response.success) {
       authStore.accessToken = response.data.token;
-      const user = await fetchUser();
+      await fetchUser();
+
+      const from = route.query.redirect as string;
+
+      if (from) {
+        navigateTo(from);
+      } else {
+        navigateTo("/");
+      }
+    }
+  }
+
+  async function signup(user: { email: string; username: string; password: string }) {
+    const route = useRoute("signup");
+
+    const response = await $api<SignUpResponse>(`${API}/signup`, {
+      method: "POST",
+      body: JSON.stringify(user),
+    });
+
+    if (response.success) {
+      authStore.accessToken = response.data.token;
+      await fetchUser();
 
       const from = route.query.redirect as string;
 
@@ -42,19 +64,29 @@ export const useAuth = () => {
     return response;
   }
 
+  async function sendVerificationEmail() {
+    const response = await $api(`/verify-email/send`, { method: "POST" });
+
+    return response;
+  }
+
   function logout() {
     $api(`${API}/logout`, { method: "POST" });
 
     authStore.accessToken = "";
     authStore.currentUser = null;
 
-    navigateTo("/login");
+    navigateTo("/signin");
   }
 
   return {
     isAuthenticated,
-    login,
+    accessToken: authStore.accessToken,
+    currentUser: authStore.currentUser,
+    signin,
+    signup,
     fetchUser,
     logout,
+    sendVerificationEmail,
   };
 };

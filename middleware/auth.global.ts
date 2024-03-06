@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
     // the route is not public
     if (!isLoggedIn.value) {
       //  the user not signed in
-      return navigateTo({ name: "login", query: { redirect: to.fullPath } });
+      return navigateTo({ name: "signin", query: { redirect: to.fullPath } });
     }
   }
 

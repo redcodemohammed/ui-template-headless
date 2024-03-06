@@ -15,7 +15,7 @@ declare global {
     name: string;
     createdAt: string;
     updatedAt: string;
-    emailIsVerified: boolean;
+    isEmailVerified: boolean;
   }
 
   type BaseResponse<T, E> =
