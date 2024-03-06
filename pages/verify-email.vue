@@ -18,7 +18,7 @@ onMounted(() => {
 });
 
 function verifyEmail(token: string) {
-  return $api("/verify-email/store", {
+  return $api("/verify-email", {
     method: "PATCH",
     body: {
       token,

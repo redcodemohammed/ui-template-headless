@@ -65,7 +65,16 @@ export const useAuth = () => {
   }
 
   async function sendVerificationEmail() {
-    const response = await $api(`/verify-email/send`, { method: "POST" });
+    const response = await $api(`/verify-email`, { method: "POST" });
+
+    return response;
+  }
+
+  async function sendPasswordResetEmail(email: string) {
+    const response = await $api(`/password-reset`, {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
 
     return response;
   }
@@ -88,5 +97,6 @@ export const useAuth = () => {
     fetchUser,
     logout,
     sendVerificationEmail,
+    sendPasswordResetEmail,
   };
 };
